@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # postgres:
+  #   container_name: db
+  #   build:
+  #     context: ./db
+  #     target: db
+  #   environment:
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #     - POSTGRES_DB=${POSTGRES_DB}
+  #   ports:
+  #     - 5555:5432
+
+  postgres_test:
+    container_name: test_db
+    build:
+      context: ./db
+      target: db
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER_TEST}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD_TEST}
+      - POSTGRES_DB=${POSTGRES_DB_TEST}
+    ports:
+      - 5566:5432
+
+  # transaction-service:
+  #   container_name: transaction_service
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - DB_DRIVER=${DB_DRIVER}
+  #     - DB_URI=${DB_URI}
+  #     - GRPC_PORT=${GRPC_PORT}
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - postgres
+  #   links:
+  #     - postgres
