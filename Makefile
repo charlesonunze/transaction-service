@@ -1,5 +1,8 @@
-run:
-	docker-compose down && docker-compose build --no-cache && docker-compose --env-file ./.env up
+db:
+	docker network prune && docker network create grey_db && docker-compose down && docker-compose build --no-cache && docker-compose up
+
+run: 
+	go run .
 
 sqlc:
 	sqlc generate
@@ -16,4 +19,4 @@ migratedown:
 buf:
 	buf mod update && buf generate
 
-.PHONY: run sqlc test migrateup migratedown buf
+.PHONY: db run sqlc test migrateup migratedown buf

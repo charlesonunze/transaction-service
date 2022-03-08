@@ -47,7 +47,7 @@ CREATE INDEX ON "transactions" ("status");
 
 -- Seed
 INSERT INTO "users" ("id", "name") 
-VALUES (10000000, 'Charles');
+VALUES (1, 'Charles');
 
 INSERT INTO "wallets" ("id", "user_id", "balance") 
-VALUES (1, 10000000, 100000);
+VALUES (1, 1, 100000);
