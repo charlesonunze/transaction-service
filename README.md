@@ -6,7 +6,7 @@ A microservice that exposes credit and debit operations.
 
 Make sure you have [Git](https://git-scm.com/downloads) and [Docker](https://docs.docker.com/get-docker/) and [Golang](https://go.dev/doc/install) installed locally.
 
-Also make sure nothing is running on ports **8080**, **7070**, **9090**. Or you can change the ports on in the **.env** file.
+Also make sure nothing is running on ports **8080**(GRPC_PORT), **7070**(WALLET_CLIENT_PORT), **9090**(G8WAY_PORT), **5555**(DB_URI) **5555**(DB_URI_TEST). Or you can change the ports on in the **.env** file.
 
 Make sure the **WALLET_CLIENT_PORT** value corresponds to the port of the wallet service.
 
@@ -39,6 +39,20 @@ make run
 ```bash
 make test
 ```
+
+## Testing the service
+
+A default user and wallet is being created when you run `make db`. Confirm that the wallet service is running as well.
+
+POST localhost:9090/api/v1/transactions/credit
+
+body {"user_id": 1, "amount": 500 }
+
+.
+
+POST localhost:9090/api/v1/transactions/debit
+
+body {"user_id": 1, "amount": 300 }
 
 ## Possible Improvements
 
