@@ -1,0 +1,10 @@
+version: v1
+lint:
+  use:
+    - DEFAULT
+  rpc_allow_google_protobuf_empty_requests: true
+  rpc_allow_google_protobuf_empty_responses: true
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/grpc-ecosystem/grpc-gateway
+  - buf.build/envoyproxy/protoc-gen-validate:dc09a417d27241f7b069feae2cd74a0e

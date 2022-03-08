@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package transaction.v1;
+
+option go_package = "github.com/charlesonunze/transaction-service/pb/v1;transactionpb";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "validate/validate.proto";
+
+service TransferService {
+  rpc CreditUser(CreditUserRequest) returns (CreditUserResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/transactions/credit"
+      body: "*"
+    };
+  }
+
+  rpc DebitUser(DebitUserRequest) returns (DebitUserResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/transactions/debit"
+      body: "*"
+    };
+  }
+}
+
+message CreditUserRequest {
+  int64 user_id = 1 [(validate.rules).int64 = { gte: 0 }];
+  int64 amount  = 2 [(validate.rules).int64 = { gte: 0 }];
+}
+
+message CreditUserResponse {
+  int64 balance = 1 [(validate.rules).int64 = { gte: 0 }];
+}
+
+message DebitUserRequest {
+  int64 user_id = 1 [(validate.rules).int64 = { gte: 0 }];
+  int64 amount  = 2 [(validate.rules).int64 = { gte: 0 }];
+}
+
+message DebitUserResponse {
+  int64 balance = 1 [(validate.rules).int64 = { gte: 0 }];
+}
